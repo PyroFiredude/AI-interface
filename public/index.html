@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vibe Image Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-shape bg-shape-a"></div>
+    <div class="bg-shape bg-shape-b"></div>
+
+    <main class="app-shell">
+      <aside class="sidebar">
+        <h1>Vibe GPT</h1>
+        <p>Chat + images powered by your OpenAI key.</p>
+        <button id="new-chat-btn" class="ghost-btn">New Chat</button>
+        <button id="image-viewer-btn" class="ghost-btn">Image Viewer</button>
+        <section class="conversation-history">
+          <h3>Conversations</h3>
+          <div id="conversation-list" class="conversation-list"></div>
+        </section>
+        <div class="meta">
+          <label class="model-picker" for="chat-model-select">
+            <span>Chat model</span>
+            <select id="chat-model-select" aria-label="Select chat model">
+              <option value="gpt-5">gpt-5</option>
+            </select>
+          </label>
+          <label class="model-picker" for="image-model-select">
+            <span>Image model</span>
+            <select id="image-model-select" aria-label="Select image model">
+              <option value="gpt-image-1">gpt-image-1</option>
+            </select>
+          </label>
+        </div>
+      </aside>
+
+      <section class="panel chat-panel">
+        <header>
+          <h2>Assistant</h2>
+        </header>
+
+        <div id="chat-log" class="chat-log"></div>
+
+        <form id="chat-form" class="chat-form">
+          <textarea
+            id="chat-input"
+            rows="1"
+            placeholder="Ask anything..."
+            required
+          ></textarea>
+          <button type="submit" id="send-btn">Send</button>
+        </form>
+      </section>
+
+      <section class="panel image-panel">
+        <header>
+          <h2>Image Studio</h2>
+          <button id="image-viewer-btn-panel" class="ghost-btn" type="button">Open Image Viewer</button>
+        </header>
+
+        <form id="image-form" class="image-form">
+          <textarea
+            id="image-prompt"
+            rows="4"
+            placeholder="Describe the image you want..."
+            required
+          ></textarea>
+          <div id="image-edit-state" class="image-edit-state hidden">
+            <span id="image-edit-label">Editing image</span>
+            <button id="clear-image-edit-btn" class="ghost-btn" type="button">Cancel Edit</button>
+          </div>
+          <div class="image-controls">
+            <select id="image-size">
+              <option value="1024x1024">1024 x 1024</option>
+              <option value="1536x1024">1536 x 1024</option>
+              <option value="1024x1536">1024 x 1536</option>
+              <option value="custom">Custom size</option>
+            </select>
+            <button type="submit" id="generate-btn">Generate</button>
+          </div>
+
+          <div id="custom-size-controls" class="custom-size-controls hidden">
+            <input
+              id="image-width"
+              type="number"
+              min="256"
+              step="1"
+              placeholder="Width"
+              aria-label="Custom image width"
+            />
+            <span>x</span>
+            <input
+              id="image-height"
+              type="number"
+              min="256"
+              step="1"
+              placeholder="Height"
+              aria-label="Custom image height"
+            />
+          </div>
+        </form>
+
+        <div id="image-result" class="image-result placeholder">
+          Your generated image appears here.
+        </div>
+      </section>
+    </main>
+
+    <section class="spend-widget" aria-live="polite" aria-label="Estimated OpenAI spend">
+      <p class="spend-kicker">Estimated spend</p>
+      <div class="spend-grid">
+        <div>
+          <p class="spend-label">This session</p>
+          <p id="spend-session-value" class="spend-value">£0.00</p>
+        </div>
+        <div>
+          <p class="spend-label">This month</p>
+          <p id="spend-month-value" class="spend-value">£0.00</p>
+        </div>
+      </div>
+      <p id="spend-meta" class="spend-meta">Estimated from local API usage.</p>
+    </section>
+
+    <div id="image-viewer-modal" class="viewer-modal hidden" aria-hidden="true">
+      <div class="viewer-card" role="dialog" aria-modal="true" aria-labelledby="viewer-title">
+        <div class="viewer-header">
+          <h3 id="viewer-title">Saved Images</h3>
+          <div class="viewer-header-actions">
+            <label class="viewer-filter">
+              <input id="favorites-only-toggle" type="checkbox" />
+              <span>Favorites only</span>
+            </label>
+            <button id="bulk-favorite-btn" class="ghost-btn" type="button">Favorite Selected</button>
+            <button id="bulk-delete-btn" class="ghost-btn" type="button">Delete Selected</button>
+            <button id="image-viewer-close" class="ghost-btn" type="button">Close</button>
+          </div>
+        </div>
+        <div id="image-viewer-grid" class="viewer-grid">
+          <p class="viewer-empty">No images saved yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

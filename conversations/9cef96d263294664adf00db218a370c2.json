@@ -1,0 +1,12 @@
+{
+  "id": "9cef96d263294664adf00db218a370c2",
+  "title": "New Conversation",
+  "createdAt": "2026-05-07T21:39:54.865Z",
+  "updatedAt": "2026-05-07T21:39:54.865Z",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "New conversation started. What are we creating today?"
+    }
+  ]
+}

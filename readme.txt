@@ -1,0 +1,1 @@
+paste your open AI key into key.txt
