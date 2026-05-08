@@ -1,4 +1,4 @@
-# Vibe GPT + Image Builder
+# AI Interface
 
 A ChatGPT-style web interface that uses your OpenAI API key for:
 - Conversational chat with the latest GPT model
